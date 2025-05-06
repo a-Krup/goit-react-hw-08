@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./contactsOps";
-import { createSelector } from "reselect";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchContacts, addContact, deleteContact } from './operations';
 
 const initialState = {
   items: [],
@@ -9,13 +8,18 @@ const initialState = {
 };
 
 const contactsSlice = createSlice({
-  name: "contacts",
+  name: 'contacts',
   initialState,
-  reducers: {},
+  reducers: {
+    clearContacts: (state) => {
+      state.items = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
@@ -27,6 +31,7 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -38,6 +43,7 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.items = state.items.filter(
@@ -52,17 +58,5 @@ const contactsSlice = createSlice({
   },
 });
 
-export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.contacts.loading;
-export const selectError = (state) => state.contacts.error;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, (state) => state.filters.name],
-  (contacts, filter) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
-);
-
+export const { clearContacts } = contactsSlice.actions;
 export default contactsSlice.reducer;

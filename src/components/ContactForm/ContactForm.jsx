@@ -17,6 +17,9 @@ const ContactForm = () => {
       .min(3, "Number must be at least 3 characters")
       .max(50, "Number must be at most 50 characters")
       .required("Number is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"), // Додаємо перевірку для email
   });
 
   const handleSubmit = (values, { resetForm }) => {
@@ -26,7 +29,7 @@ const ContactForm = () => {
 
   return (
     <Formik
-      initialValues={{ name: "", number: "" }}
+      initialValues={{ name: "", number: "", email: "" }} // Додаємо email до initialValues
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -63,6 +66,22 @@ const ContactForm = () => {
             component="div"
             className={styles.error}
           />
+        </div>
+
+        {/* Додаємо поле для електронної пошти */}
+        <div className={styles.fieldGroup}>
+          <label htmlFor="email" className={styles.label}>
+            Email
+          </label>
+          <Field
+            name="email"
+            type="email"
+            id="email"
+            placeholder="Email"
+            className={styles.input}
+            autoComplete="email"
+          />
+          <ErrorMessage name="email" component="div" className={styles.error} />
         </div>
 
         <div className={styles.buttonWrapper}>

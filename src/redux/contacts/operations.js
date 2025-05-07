@@ -43,6 +43,7 @@ export const addContact = createAsyncThunk(
       const response = await axios.post(API_URL, {
         name: contact.name,
         number: cleanedNumber,
+       
       });
       return response.data;
     } catch (error) {

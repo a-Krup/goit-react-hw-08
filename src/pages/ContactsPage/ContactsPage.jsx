@@ -10,7 +10,7 @@ import styles from './ContactsPage.module.css';
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const error = useSelector(selectError); // Отримуємо помилку з Redux
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -22,7 +22,7 @@ const ContactsPage = () => {
       <ContactForm />
       <SearchBox />
       {loading && <p className={styles.message}>Loading contacts...</p>}
-      {error && <p className={styles.error}>Error: {error}</p>}
+      {error && <p className={styles.error}>Error: {error}</p>} {/* Виводимо помилку, якщо вона є */}
       <ContactList />
     </div>
   );

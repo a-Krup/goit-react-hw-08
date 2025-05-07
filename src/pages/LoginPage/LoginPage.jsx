@@ -1,12 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { login } from '../../redux/auth/operations';
+import { selectError } from '../../redux/auth/selectors'; // Додаємо селектор для помилки
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const error = useSelector(selectError); // Отримуємо помилку з Redux
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email').required('Required'),
@@ -21,6 +23,7 @@ const LoginPage = () => {
   return (
     <div className={styles.container}>
       <h2>Login</h2>
+      {error && <p className={styles.error}>{error}</p>} {/* Виводимо помилку, якщо вона є */}
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}

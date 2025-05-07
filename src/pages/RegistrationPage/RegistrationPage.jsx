@@ -1,12 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { register } from '../../redux/auth/operations';
+import { selectError } from '../../redux/auth/selectors'; // Додаємо селектор для помилки
 import styles from './RegistrationPage.module.css';
 
 const RegistrationPage = () => {
   const dispatch = useDispatch();
+  const error = useSelector(selectError); // Отримуємо помилку з Redux
 
   const validationSchema = Yup.object({
     name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -22,6 +24,7 @@ const RegistrationPage = () => {
   return (
     <div className={styles.container}>
       <h2>Register</h2>
+      {error && <p className={styles.error}>{error}</p>} {/* Виводимо помилку, якщо вона є */}
       <Formik
         initialValues={{ name: '', email: '', password: '' }}
         validationSchema={validationSchema}

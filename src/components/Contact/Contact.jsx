@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { FaUser, FaPhoneAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/operations';
-import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
-import { toast } from 'react-hot-toast';
-import styles from './Contact.module.css';
-
+import React, { useState } from "react";
+import { FaUser, FaPhoneAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contacts/operations";
+import DeleteConfirmation from "../DeleteConfirmation/DeleteConfirmation";
+import { toast } from "react-hot-toast";
+import styles from "./Contact.module.css";
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -14,10 +13,10 @@ const Contact = ({ contact }) => {
   const handleDelete = () => {
     dispatch(deleteContact(contact.id))
       .then(() => {
-        toast.success('Контакт успішно видалено!');
+        toast.success("Contact successfully deleted!");
       })
       .catch(() => {
-        toast.error('Сталася помилка при видаленні контакту.');
+        toast.error("An error occurred while deleting the contact.");
       });
     setShowModal(false);
   };
@@ -39,7 +38,7 @@ const Contact = ({ contact }) => {
           className={styles.deleteButton}
           onClick={() => setShowModal(true)}
         >
-          Видалити
+          Delete
         </button>
       </li>
 

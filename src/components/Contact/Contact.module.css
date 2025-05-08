@@ -9,8 +9,7 @@
   border-radius: 5px;
   margin-bottom: 5px;
   gap: 20px;
-  width:350px;
-  
+  max-width: 220px;
 }
 
 .contact:hover {

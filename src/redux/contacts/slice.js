@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 
 const initialState = {
   items: [],
@@ -8,15 +8,14 @@ const initialState = {
 };
 
 const contactsSlice = createSlice({
-  name: 'contacts',
+  name: "contacts",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Завантаження контактів
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
-        state.error = null; // очищуємо помилку перед завантаженням
+        state.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
@@ -24,13 +23,12 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Failed to fetch contacts'; // зберігаємо помилку
+        state.error = action.payload || "Failed to fetch contacts";
       })
-      
-      // Додавання контакту
+
       .addCase(addContact.pending, (state) => {
         state.loading = true;
-        state.error = null; // очищуємо помилку перед додаванням
+        state.error = null;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -38,21 +36,22 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Failed to add contact'; // зберігаємо помилку
+        state.error = action.payload || "Failed to add contact";
       })
-      
-      // Видалення контакту
+
       .addCase(deleteContact.pending, (state) => {
         state.loading = true;
-        state.error = null; // очищуємо помилку перед видаленням
+        state.error = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter((contact) => contact.id !== action.payload);
+        state.items = state.items.filter(
+          (contact) => contact.id !== action.payload
+        );
         state.loading = false;
       })
       .addCase(deleteContact.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Failed to delete contact'; // зберігаємо помилку
+        state.error = action.payload || "Failed to delete contact";
       });
   },
 });

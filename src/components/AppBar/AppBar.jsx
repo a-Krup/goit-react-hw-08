@@ -1,32 +1,12 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsLoggedIn, selectUser } from '../../redux/auth/selectors';
-import { logout } from '../../redux/auth/operations';
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/operations";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
+import styles from "./AppBar.module.css";
 
 const AppBar = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  return (
-    <header style={headerStyle}>
-      <nav style={navStyle}>
-        <NavLink to="/" style={linkStyle}>Home</NavLink>
-        {isLoggedIn && <NavLink to="/contacts" style={linkStyle}>Contacts</NavLink>}
-      </nav>
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </header>
-  );
-};
-
-const AuthNav = () => (
-  <div>
-    <NavLink to="/register" style={linkStyle}>Register</NavLink>
-    <NavLink to="/login" style={linkStyle}>Login</NavLink>
-  </div>
-);
-
-const UserMenu = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
@@ -34,30 +14,61 @@ const UserMenu = () => {
   };
 
   return (
-    <div>
-      <span style={{ marginRight: 12 }}>Welcome, {user.name}</span>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Home
+        </NavLink>
+        {isLoggedIn && (
+          <NavLink
+            to="/contacts"
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+          >
+            Contacts
+          </NavLink>
+        )}
+      </nav>
+
+      {isLoggedIn ? (
+        <div className={styles.userMenu}>
+          <span className={styles.userName}>Hello, {user.name}</span>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <AuthNav />
+      )}
+    </header>
   );
 };
 
-const headerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px 20px',
-  borderBottom: '1px solid #ccc',
-  backgroundColor: '#f8f8f8',
-};
-
-const navStyle = {
-  display: 'flex',
-  gap: '15px',
-};
-
-const linkStyle = {
-  textDecoration: 'none',
-  color: '#333',
-};
+const AuthNav = () => (
+  <div className={styles.authNav}>
+    <NavLink
+      to="/register"
+      className={({ isActive }) =>
+        isActive ? `${styles.link} ${styles.active}` : styles.link
+      }
+    >
+      Register
+    </NavLink>
+    <NavLink
+      to="/login"
+      className={({ isActive }) =>
+        isActive ? `${styles.link} ${styles.active}` : styles.link
+      }
+    >
+      Login
+    </NavLink>
+  </div>
+);
 
 export default AppBar;

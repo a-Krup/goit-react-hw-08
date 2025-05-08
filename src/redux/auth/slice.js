@@ -1,57 +1,56 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { register, login, logout, refreshUser } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { register, login, logout, refreshUser } from "./operations";
 
-// Початковий стан
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
-  error: null, // Додаємо поле для помилки
+  error: null,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.error = null; // очищуємо помилку після успішної реєстрації
+        state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.error = null; // очищуємо помилку після успішного логіну
+        state.error = null;
       })
-      .addCase(logout.fulfilled, state => {
+      .addCase(logout.fulfilled, (state) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
-        state.error = null; // очищуємо помилку після логауту
+        state.error = null;
       })
-      .addCase(refreshUser.pending, state => {
+      .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
-        state.error = null; // очищуємо помилку під час запиту на оновлення
+        state.error = null;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
-        state.error = null; // очищуємо помилку після успішного оновлення користувача
+        state.error = null;
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
-        state.error = action.payload || 'Failed to refresh user data'; // Зберігаємо помилку
+        state.error = action.payload || "Failed to refresh user data";
       })
       .addCase(register.rejected, (state, action) => {
-        state.error = action.payload || 'Failed to register'; // Зберігаємо помилку
+        state.error = action.payload || "Failed to register";
       })
       .addCase(login.rejected, (state, action) => {
-        state.error = action.payload || 'Failed to login'; // Зберігаємо помилку
+        state.error = action.payload || "Failed to login";
       });
   },
 });

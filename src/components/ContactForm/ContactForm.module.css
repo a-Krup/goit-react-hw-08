@@ -43,7 +43,7 @@
 
 .buttonWrapper {
   display: flex;
-  justify-content: center; /* Центруємо кнопку */
+  justify-content: center;
 }
 
 .button {
@@ -59,6 +59,7 @@
 
 .button:hover {
   background-color: #0056b3;
+  color: rgb(240, 226, 226);
 }
 
 .button:focus {

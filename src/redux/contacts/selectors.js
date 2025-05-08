@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 export const selectContacts = (state) => state.contacts.items;
 export const selectLoading = (state) => state.contacts.loading;
@@ -8,9 +8,10 @@ export const selectFilteredContacts = createSelector(
   [selectContacts, (state) => state.filters.name],
   (contacts, filter) => {
     const lowerFilter = filter.toLowerCase().trim();
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(lowerFilter) ||
-      contact.number.toLowerCase().includes(lowerFilter)
+    return contacts.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(lowerFilter) ||
+        contact.number.toLowerCase().includes(lowerFilter)
     );
   }
 );

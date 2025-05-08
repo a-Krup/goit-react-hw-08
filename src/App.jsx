@@ -11,6 +11,8 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import RestrictedRoute from "./components/Routes/RestrictedRoute";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(() =>

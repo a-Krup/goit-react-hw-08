@@ -1,40 +1,40 @@
 .modalHeader {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .modalTitle {
-    font-weight: bold;
-    font-size: 1.25rem;
-  }
-  
-  .modalBody {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .modalFooter {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-  }
-  
-  .cancelBtn {
-    background-color: #6c757d;
-    border-color: #6c757d;
-  }
-  
-  .cancelBtn:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-  }
-  
-  .deleteBtn {
-    background-color: #dc3545;
-    border-color: #dc3545;
-  }
-  
-  .deleteBtn:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-  }
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modalTitle {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.modalBody {
+  font-size: 1rem;
+  color: #333;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.cancelBtn {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.cancelBtn:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.deleteBtn:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}

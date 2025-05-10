@@ -4,11 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { login } from "../../redux/auth/operations";
 import { selectError } from "../../redux/auth/selectors";
+import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -17,8 +19,16 @@ const LoginPage = () => {
       .required("Required"),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    dispatch(login(values));
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const result = await dispatch(login(values));
+
+      if (result.payload) {
+        navigate("/contacts");
+      }
+    } catch (error) {
+      console.error("Login error", error);
+    }
     resetForm();
   };
 

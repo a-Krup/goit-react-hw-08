@@ -9,112 +9,17 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav {
-  display: flex;
-  gap: 30px;
-}
-
-.link {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 24px;
-  transition: color 0.3s;
-}
-
-.link:hover {
-  color: #ffdd57;
-  text-decoration: underline;
-}
-
-.active {
-  color: #ffdd57;
-  font-weight: 600;
-}
-
-.authNav {
-  display: flex;
-  gap: 16px;
-}
-
-.userMenu {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.userName {
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 0.5px;
-}
-
-.logoutButton {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.logoutButton:hover {
-  background-color: #cc0000;
-}
-
 @media (max-width: 768px) {
   .header {
     align-items: flex-start;
     padding: 8px 16px;
   }
-
-  .nav {
-    gap: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-
-  .link {
-    font-size: 18px;
-  }
-
-  .userMenu {
-    flex-direction: row;
-    gap: 12px;
-    align-content: center;
-    justify-items: center;
-    padding: 12px 0;
-  }
-
-  .logoutButton {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
 }
 
 @media (max-width: 420px) {
   .header {
-    padding: 14px 24px;
+    padding: 14px 42px;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .nav {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .userMenu {
-    gap: 16px;
-    padding: 0;
-  }
-
-  .link {
-    font-size: 16px;
   }
 }
